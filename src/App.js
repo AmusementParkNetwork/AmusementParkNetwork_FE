@@ -11,8 +11,8 @@ function App() {
         console.log("이름:", name);
         console.log("근무지:", workArea || "근무지를 설정하지 않았습니다.");
 
-        // 채팅 페이지로 이동
-        navigate("/chat");
+        // 채팅 페이지로 이동하며 state 전달
+        navigate("/chat", { state: { name, workArea } });
     };
 
     return (

@@ -40,8 +40,9 @@
 
 /* 채팅 메시지 */
 .chat-message {
-    display: inline-block;
-    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
     padding: 8px 12px;
     border-radius: 10px;
     max-width: 70%;
@@ -54,7 +55,6 @@
     text-align: right;
     color: white;
     background-color: #007bff;
-    margin-left: auto;
 }
 
 .chat-other {
@@ -98,6 +98,8 @@
     border-radius: 5px;
     margin-right: 10px;
     font-size: 16px;
+    resize: none;
+    overflow: auto;
 }
 
 .chat-send {
@@ -168,9 +170,9 @@
     text-align: center;
 }
 
-    .sidebar-button:hover {
+.sidebar-button:hover {
         background-color: #3000cc;
-    }
+ }
 
 .sidebar-label {
     margin-top: -5px;
@@ -178,4 +180,10 @@
     color: #333;
     text-align: center;
     width: 100%;
+}
+
+.message-meta {
+    font-size: 12px;
+    margin-bottom: 5px;
+    font-weight: bold;
 }
