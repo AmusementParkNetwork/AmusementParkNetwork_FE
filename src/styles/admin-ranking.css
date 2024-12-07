@@ -1,0 +1,108 @@
+.ranking-container {
+  display: flex;
+  flex-direction: column;
+
+  height: 100%;
+}
+
+.ranking-tabs {
+  display: flex;
+  gap: 6px;
+
+  padding: 0 24px;
+  padding-bottom: 12px;
+}
+
+.ranking-tab-button {
+  padding: 6px 10px;
+
+  background-color: white;
+
+  border: solid 1px;
+  border-color: lightgray;
+  border-radius: 6px;
+
+  cursor: pointer;
+
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.ranking-tab-button.active {
+  background-color: blue;
+
+  border-color: blue;
+
+  color: white;
+}
+
+.ranking-list {
+  flex: 1;
+
+  margin: 0;
+
+  padding: 0;
+  height: 100%;
+
+  list-style: none;
+
+  overflow: auto;
+}
+
+.raking-box {
+  display: flex;
+  justify-content: space-between;
+
+  padding: 16px 24px;
+
+  border-top: solid 1px lightgray;
+}
+
+.raking-box > * {
+  flex: 1;
+}
+
+.raking-box > span {
+  font-weight: 600;
+}
+
+.raking-box > span:last-child {
+  text-align: end;
+}
+
+.gauge-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.gauge-box {
+  width: 24px;
+  height: 24px;
+
+  background-color: lightgray;
+}
+
+.gauge-box.active:nth-child(1) {
+  background-color: #fdc993;
+}
+
+.gauge-box.active:nth-child(2) {
+  background-color: #fdb777;
+}
+
+.gauge-box.active:nth-child(3) {
+  background-color: #fda766;
+}
+
+.gauge-box.active:nth-child(4) {
+  background-color: #fd9346;
+}
+
+.gauge-box.active:nth-child(5) {
+  background-color: #fd7f2c;
+}
+
+.gauge-box.active:nth-child(6) {
+  background-color: #ff6200;
+}
