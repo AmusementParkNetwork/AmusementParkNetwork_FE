@@ -32,7 +32,7 @@ const ChatView = () => {
 
   const handleSend = () => {
     if (message.trim()) {
-      const chatMessage = { sender: "관리자 알림", text: message, isAdmin: true };
+      const chatMessage = { sender: "관제실 알림", text: message, isAdmin: true };
       socket.emit("chat message", chatMessage); // 서버로 메시지 전송
       setChats((prevChats) => [...prevChats, chatMessage]); // UI 업데이트
       setMessage(""); // 입력 필드 초기화
