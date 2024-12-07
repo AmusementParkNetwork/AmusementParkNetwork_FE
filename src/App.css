@@ -8,6 +8,14 @@ body {
   background-color: #ffffff;
 }
 
+body {
+    margin: 0;
+    font-family: 'Noto Sans KR', 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+
 .container {
   text-align: center;
 }
