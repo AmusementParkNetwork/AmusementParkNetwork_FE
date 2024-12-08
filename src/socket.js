@@ -1,7 +1,11 @@
 import { io } from "socket.io-client";
 
-export const socket = io("https://api.flrou.site", {
-  withCredentials: true,
-  transports: ["websocket"],
+const io = socketIo(server, {
+  cors: {
+    origin: "https://flrou.site",
+    credentials: true,
+    methods: ["GET", "POST"],
+  },
+  transports: ["websocket", "polling"],
 });
 // export const socket = io("http://localhost:9000");
