@@ -12,12 +12,12 @@ html, body {
 .chat-container {
     display: flex;
     flex-direction: column;
-    width: 150vw; /* 화면 가로의 150% */
-    height: 150vh; /* 화면 세로의 150% */
+    width: 600px; /* 화면 가로의 150% */
+    height: 500px; /* 화면 세로의 150% */
     margin: 0;
     font-family: 'Noto Sans KR', Arial, sans-serif;
     box-sizing: border-box;
-    overflow: hidden; /* 넘침 방지 */
+    overflow: auto;
 }
 
 /* 헤더 */
@@ -59,6 +59,7 @@ html, body {
     display: flex;
     flex-direction: column;
     overflow: hidden;
+    height:500px;
     box-sizing: border-box;
 }
 
@@ -71,27 +72,6 @@ html, body {
     box-sizing: border-box;
 }
 
-/* 스크롤바 추가 스타일 */
-.chat-main::-webkit-scrollbar,
-.chat-sidebar::-webkit-scrollbar,
-.chat-messages::-webkit-scrollbar {
-    width: 8px; 
-}
-
-.chat-main::-webkit-scrollbar-thumb,
-.chat-sidebar::-webkit-scrollbar-thumb,
-.chat-messages::-webkit-scrollbar-thumb {
-    background-color: #ccc;
-    border-radius: 4px; 
-}
-
-.chat-main::-webkit-scrollbar-track,
-.chat-sidebar::-webkit-scrollbar-track,
-.chat-messages::-webkit-scrollbar-track {
-    background-color: #f9f9f9; 
-}
-
-
 /* 채팅 메시지 */
 .chat-message {
     display: flex;
@@ -99,7 +79,7 @@ html, body {
     margin-bottom: 15px;
     padding: 8px 12px;
     border-radius: 20px;
-    max-width: 40%;
+    max-width: 50%;
     word-wrap: break-word;
     box-sizing: border-box;
     position: relative;
@@ -125,6 +105,13 @@ html, body {
     color: gray;
 }
 
+.chat-control-room {
+    background-color: lemonchiffon !important; /* 관제실 운영팀 메시지 배경색 */
+    color: #000 !important; /* 텍스트 색상 */
+    font-weight: bold !important; /* 텍스트 강조 */
+}
+
+
 /* 상대방이 보낸 메시지 */
 .chat-other {
     align-self: flex-start;
@@ -134,6 +121,7 @@ html, body {
     margin-left: 0;
     position: relative;
 }
+
 
 /* 상대방 메시지 시간 */
 .message-time-right {
@@ -182,9 +170,9 @@ html, body {
     transition: transform 0.2s ease, background-color 0.2s ease;
 }
 
-.chat-send:hover {
-    background-color: #3000cc;
-}
+    .chat-send:hover {
+        background-color: #3000cc;
+    }
 
 /* 사이드바 버튼 */
 .sidebar-button {
@@ -200,7 +188,8 @@ html, body {
     font-size: 14px;
 }
 
-.sidebar-button:hover {
-    background-color: #3000cc;
-}
+    .sidebar-button:hover {
+        background-color: #3000cc;
+    }
+
 
