@@ -1,11 +1,20 @@
+/* HTML과 BODY 설정 */
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
 /* 전체 컨테이너 */
 .chat-container {
     display: flex;
     flex-direction: column;
-    width: 90vw; /* 화면 가로의 90% */
-    max-width: 1200px; /* 최대 너비 설정 */
-    height: 90vh; /* 화면 세로의 90% */
-    margin: 0 auto;
+    width: 150vw; /* 화면 가로의 150% */
+    height: 150vh; /* 화면 세로의 150% */
+    margin: 0;
     font-family: 'Noto Sans KR', Arial, sans-serif;
     box-sizing: border-box;
     overflow: hidden; /* 넘침 방지 */
@@ -18,43 +27,37 @@
     background-color: #f3f3f3;
     border-bottom: 1px solid #ddd;
     font-weight: bold;
-    font-size: 1.5rem; /* 반응형 폰트 크기 */
-}
-
-/* 로고 */
-.chat-icon {
-    width: 150px; /* 로고 너비 */
-    height: 150px; /* 로고 높이 */
-    margin-top: 30px;
-    margin-bottom: 30px;
+    font-size: 1.5rem;
 }
 
 /* 메인 컨테이너 (사이드바 + 채팅 영역) */
 .chat-main-container {
     display: flex;
     flex: 1;
-    overflow: hidden; /* 넘침 방지 */
+    width: 100%; /* 부모의 전체 가로폭 */
+    height: 100%; /* 부모의 전체 세로폭 */
     background-color: #fff;
+    box-sizing: border-box;
 }
 
 /* 사이드바 */
 .chat-sidebar {
-    width: 25%; /* 가로폭의 25% */
+    flex: 0 0 20%; /* 사이드바를 가로폭의 20%로 설정 */
+    height: 100%; /* 부모의 세로폭 전체 */
     background-color: white;
-    border-right: 1px solid #ddd; /* 사이드바와 채팅 영역 구분 */
+    border-right: 1px solid #ddd;
     padding: 10px;
     box-sizing: border-box;
     overflow-y: auto; /* 스크롤 가능 */
     display: flex;
     flex-direction: column;
-    align-items: center;
 }
 
 /* 채팅 영역 */
 .chat-main {
-    flex: 1; /* 나머지 공간을 차지 */
+    flex: 1;
     display: flex;
-    flex-direction: column; /* 채팅 메시지와 입력창을 세로로 배치 */
+    flex-direction: column;
     overflow: hidden;
     box-sizing: border-box;
 }
@@ -62,7 +65,7 @@
 /* 채팅 메시지 스크롤 영역 */
 .chat-messages {
     flex: 1;
-    overflow-y: auto; /* 스크롤 가능 */
+    overflow-y: auto;
     padding: 20px;
     background-color: #f9f9f9;
     box-sizing: border-box;
@@ -78,24 +81,24 @@
     max-width: 40%;
     word-wrap: break-word;
     box-sizing: border-box;
-    position: relative; /* 시간 위치 조정을 위해 */
+    position: relative;
 }
 
 .chat-you {
-    align-self: flex-end; /* 오른쪽 정렬 */
+    align-self: flex-end;
     text-align: right;
     color: white;
     background-color: #4000FF;
-    margin-right: 0; /* 오른쪽 가장자리에 붙이기 */
-    margin-left: auto; /* 왼쪽 여백 제거 */
-    position: relative; /* 시간 위치를 조정할 수 있도록 설정 */
+    margin-right: 0;
+    margin-left: auto;
+    position: relative;
 }
 
-/* 내가 보낸 메시지 시간 (왼쪽) */
+/* 내가 보낸 메시지 시간 */
 .message-time-left {
     position: absolute;
-    left: -70px; /* 텍스트 박스의 왼쪽에 위치 */
-    top: 85%; /* 수직 정렬 */
+    left: -70px;
+    top: 85%;
     transform: translateY(-50%);
     font-size: 0.8rem;
     color: gray;
@@ -103,19 +106,19 @@
 
 /* 상대방이 보낸 메시지 */
 .chat-other {
-    align-self: flex-start; /* 왼쪽 정렬 */
+    align-self: flex-start;
     text-align: left;
     color: black;
     background-color: #f1f1f1;
-    margin-left: 0; /* 왼쪽 가장자리에 붙이기 */
-    position: relative; /* 시간 위치를 조정할 수 있도록 설정 */
+    margin-left: 0;
+    position: relative;
 }
 
-/* 상대방 메시지 시간 (오른쪽) */
+/* 상대방 메시지 시간 */
 .message-time-right {
     position: absolute;
-    right: -70px; /* 텍스트 박스의 오른쪽에 위치 */
-    top: 85%; /* 수직 정렬 */
+    right: -70px;
+    top: 85%;
     transform: translateY(-50%);
     font-size: 0.8rem;
     color: gray;
@@ -124,7 +127,7 @@
 /* 메시지 내용 */
 .message-content {
     display: flex;
-    flex-direction: column; /* 메타 정보와 메시지를 세로로 배치 */
+    flex-direction: column;
     margin-bottom: 5px;
 }
 
@@ -133,8 +136,8 @@
     display: flex;
     padding: 10px;
     background-color: #fff;
-    box-sizing: border-box;
     border-top: 1px solid #ddd;
+    box-sizing: border-box;
 }
 
 .chat-input {
@@ -162,15 +165,9 @@
     background-color: #3000cc;
 }
 
-/* 전송 버튼 클릭 효과 */
-.chat-send:active {
-    transform: scale(0.95); /* 버튼을 누를 때 크기를 줄임 */
-    background-color: #3000cc; /* 눌렀을 때 배경색 */
-}
-
 /* 사이드바 버튼 */
 .sidebar-button {
-    width: 60%;
+    width: 80%;
     padding: 10px;
     margin-bottom: 10px;
     background-color: #4000FF;
