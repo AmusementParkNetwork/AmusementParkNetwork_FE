@@ -2,39 +2,69 @@
 .chat-container {
     display: flex;
     flex-direction: column;
-    width: 600px;
-    height: 100vh;
+    width: 90vw; /* 화면 가로의 90% */
+    max-width: 1200px; /* 최대 너비 설정 */
+    height: 90vh; /* 화면 세로의 90% */
     margin: 0 auto;
-    padding: 0;
     font-family: 'Noto Sans KR', Arial, sans-serif;
-    box-sizing: border-box; /* 패딩 포함 크기 계산 */
+    box-sizing: border-box;
+    overflow: hidden; /* 넘침 방지 */
 }
 
+/* 헤더 */
 .chat-header {
     text-align: center;
-    padding: 10px;
+    padding: 1px;
     background-color: #f3f3f3;
     border-bottom: 1px solid #ddd;
     font-weight: bold;
+    font-size: 1.5rem; /* 반응형 폰트 크기 */
 }
 
-/* 채팅 영역과 사이드바 배치 */
-.chat-content {
+/* 로고 */
+.chat-icon {
+    width: 150px; /* 로고 너비 */
+    height: 150px; /* 로고 높이 */
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+/* 메인 컨테이너 (사이드바 + 채팅 영역) */
+.chat-main-container {
     display: flex;
-    flex-grow: 1; /* 남은 공간을 차지하도록 설정 */
-    border: 1px solid #ddd;
-    height: 400px;
-    box-sizing: border-box; /* 패딩 포함 크기 계산 */
+    flex: 1;
+    overflow: hidden; /* 넘침 방지 */
+    background-color: #fff;
 }
 
-.chat-main {
+/* 사이드바 */
+.chat-sidebar {
+    width: 25%; /* 가로폭의 25% */
+    background-color: white;
+    border-right: 1px solid #ddd; /* 사이드바와 채팅 영역 구분 */
+    padding: 10px;
+    box-sizing: border-box;
+    overflow-y: auto; /* 스크롤 가능 */
     display: flex;
     flex-direction: column;
-    padding: 10px;
-    overflow-y: auto;
-    background-color: #fff;
-    flex-grow: 1;
-    height: 100%;
+    align-items: center;
+}
+
+/* 채팅 영역 */
+.chat-main {
+    flex: 1; /* 나머지 공간을 차지 */
+    display: flex;
+    flex-direction: column; /* 채팅 메시지와 입력창을 세로로 배치 */
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+/* 채팅 메시지 스크롤 영역 */
+.chat-messages {
+    flex: 1;
+    overflow-y: auto; /* 스크롤 가능 */
+    padding: 20px;
+    background-color: #f9f9f9;
     box-sizing: border-box;
 }
 
@@ -44,146 +74,114 @@
     flex-direction: column;
     margin-bottom: 15px;
     padding: 8px 12px;
-    border-radius: 10px;
-    max-width: 70%;
+    border-radius: 20px;
+    max-width: 40%;
     word-wrap: break-word;
     box-sizing: border-box;
+    position: relative; /* 시간 위치 조정을 위해 */
 }
 
 .chat-you {
-    align-self: flex-end;
+    align-self: flex-end; /* 오른쪽 정렬 */
     text-align: right;
     color: white;
-    background-color: #007bff;
+    background-color: #4000FF;
+    margin-right: 0; /* 오른쪽 가장자리에 붙이기 */
+    margin-left: auto; /* 왼쪽 여백 제거 */
+    position: relative; /* 시간 위치를 조정할 수 있도록 설정 */
 }
 
+/* 내가 보낸 메시지 시간 (왼쪽) */
+.message-time-left {
+    position: absolute;
+    left: -70px; /* 텍스트 박스의 왼쪽에 위치 */
+    top: 85%; /* 수직 정렬 */
+    transform: translateY(-50%);
+    font-size: 0.8rem;
+    color: gray;
+}
+
+/* 상대방이 보낸 메시지 */
 .chat-other {
-    align-self: flex-start;
+    align-self: flex-start; /* 왼쪽 정렬 */
     text-align: left;
     color: black;
     background-color: #f1f1f1;
-    margin-right: auto;
+    margin-left: 0; /* 왼쪽 가장자리에 붙이기 */
+    position: relative; /* 시간 위치를 조정할 수 있도록 설정 */
 }
 
-.chat-main .chat-message + .chat-message {
-    margin-top: 10px;
+/* 상대방 메시지 시간 (오른쪽) */
+.message-time-right {
+    position: absolute;
+    right: -70px; /* 텍스트 박스의 오른쪽에 위치 */
+    top: 85%; /* 수직 정렬 */
+    transform: translateY(-50%);
+    font-size: 0.8rem;
+    color: gray;
 }
 
-/* 채팅 스크롤바 */
-.chat-main::-webkit-scrollbar {
-    width: 8px;
-}
-
-.chat-main::-webkit-scrollbar-thumb {
-    background-color: #ccc;
-    border-radius: 4px;
-}
-
-.chat-main::-webkit-scrollbar-track {
-    background-color: #f9f9f9;
+/* 메시지 내용 */
+.message-content {
+    display: flex;
+    flex-direction: column; /* 메타 정보와 메시지를 세로로 배치 */
+    margin-bottom: 5px;
 }
 
 /* 채팅 입력 영역 */
 .chat-footer {
     display: flex;
-    border-top: 1px solid #ddd;
     padding: 10px;
-    background-color: #f9f9f9;
+    background-color: #fff;
+    box-sizing: border-box;
+    border-top: 1px solid #ddd;
 }
 
 .chat-input {
     flex-grow: 1;
-    padding: 10px;
+    padding: 15px;
     border: 1px solid #ddd;
-    border-radius: 5px;
+    border-radius: 15px;
     margin-right: 10px;
     font-size: 16px;
     resize: none;
-    overflow: auto;
 }
 
 .chat-send {
-    background-color: #28a745;
+    background-color: #4000FF;
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 15px;
     padding: 10px 20px;
     font-size: 16px;
     cursor: pointer;
+    transition: transform 0.2s ease, background-color 0.2s ease;
 }
 
-    .chat-send:hover {
-        background-color: #218838;
-    }
-
-/* 사이드바 */
-.chat-sidebar {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    width: 150px;
-    background-color: #f9f9f9;
-    padding: 10px;
-    box-sizing: border-box;
+.chat-send:hover {
+    background-color: #3000cc;
 }
 
-.chat-icon {
-    width: 80px;
-    height: 80px;
-    margin-bottom: 20px;
-}
-
-/* 사이드바 그룹 */
-.sidebar-button-group {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 20px;
-}
-
-.sidebar-top {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-}
-
-.sidebar-bottom {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
+/* 전송 버튼 클릭 효과 */
+.chat-send:active {
+    transform: scale(0.95); /* 버튼을 누를 때 크기를 줄임 */
+    background-color: #3000cc; /* 눌렀을 때 배경색 */
 }
 
 /* 사이드바 버튼 */
 .sidebar-button {
-    margin-bottom: 10px;
+    width: 60%;
     padding: 10px;
+    margin-bottom: 10px;
     background-color: #4000FF;
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 10px;
     cursor: pointer;
-    font-size: 14px;
-    width: 100%;
     text-align: center;
+    font-size: 14px;
 }
 
 .sidebar-button:hover {
-        background-color: #3000cc;
- }
-
-.sidebar-label {
-    margin-top: -5px;
-    font-size: 14px;
-    color: #333;
-    text-align: center;
-    width: 100%;
-}
-
-.message-meta {
-    font-size: 12px;
-    margin-bottom: 5px;
-    font-weight: bold;
+    background-color: #3000cc;
 }
