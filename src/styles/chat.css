@@ -12,12 +12,12 @@ html, body {
 .chat-container {
     display: flex;
     flex-direction: column;
-    width: 150vw; /* 화면 가로의 150% */
-    height: 150vh; /* 화면 세로의 150% */
+    width: 600px; /* 화면 가로의 150% */
+    height: 500px; /* 화면 세로의 150% */
     margin: 0;
     font-family: 'Noto Sans KR', Arial, sans-serif;
     box-sizing: border-box;
-    overflow: hidden; /* 넘침 방지 */
+    overflow: auto;
 }
 
 /* 헤더 */
@@ -59,6 +59,7 @@ html, body {
     display: flex;
     flex-direction: column;
     overflow: hidden;
+    height:500px;
     box-sizing: border-box;
 }
 
@@ -78,7 +79,7 @@ html, body {
     margin-bottom: 15px;
     padding: 8px 12px;
     border-radius: 20px;
-    max-width: 40%;
+    max-width: 50%;
     word-wrap: break-word;
     box-sizing: border-box;
     position: relative;
@@ -161,9 +162,9 @@ html, body {
     transition: transform 0.2s ease, background-color 0.2s ease;
 }
 
-.chat-send:hover {
-    background-color: #3000cc;
-}
+    .chat-send:hover {
+        background-color: #3000cc;
+    }
 
 /* 사이드바 버튼 */
 .sidebar-button {
@@ -179,6 +180,6 @@ html, body {
     font-size: 14px;
 }
 
-.sidebar-button:hover {
-    background-color: #3000cc;
-}
+    .sidebar-button:hover {
+        background-color: #3000cc;
+    }
