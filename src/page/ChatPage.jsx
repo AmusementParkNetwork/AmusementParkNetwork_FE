@@ -14,15 +14,6 @@ function ChatPage() {
 
   const { socket } = useContext(SocketContext);
 
-  // const [messages, setMessages] = useState([
-  //   {
-  //     sender: "관리자",
-  //     text: "집에 가고 싶어요",
-  //     area: "편의시설 구역",
-  //     time: "오후 12:05",
-  //   },
-  //   { sender: name, text: "수고해라", area: workArea, time: "오후 12:05" },
-  // ]);
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
   const [congestion, setCongestion] = useState({
@@ -36,7 +27,6 @@ function ChatPage() {
 
   useEffect(() => {
     socket.on("userJoined", ({ username, users }) => {
-      console.log("현재 접속자: ", users);
       const systemMessage = {
         sender: "System",
         text: `${username}님이 입장하셨습니다.`,
@@ -50,7 +40,6 @@ function ChatPage() {
     });
 
     socket.on("userLeft", ({ username, users }) => {
-      console.log("현재 접속자: ", users);
       const systemMessage = {
         sender: "System",
         text: `${username}님이 퇴장하셨습니다.`,
@@ -68,12 +57,10 @@ function ChatPage() {
     });
 
     socket.on("crowdedNum", (data) => {
-      console.log("혼잡도: ", data);
       setCongestion(data);
     });
 
     socket.on("waitingNum", (data) => {
-      console.log("대기시간: ", data);
       setWaiting(data);
     });
 
@@ -90,39 +77,11 @@ function ChatPage() {
 
   const handleSendMessage = () => {
     if (newMessage.trim()) {
-      // 1) 대기시간 요청
-      if (newMessage.trim() === "/대기시간") {
-        const systemMessage = {
-          sender: "System",
-          text: `현재 대기시간은 ${waiting.time}분 입니다.`,
-          time: new Date().toLocaleTimeString([], {
-            hour: "2-digit",
-            minute: "2-digit",
-          }),
-          area: "시스템",
-        };
-        setMessages((prev) => [...prev, systemMessage]);
-        setNewMessage("");
-        return;
-      } else if (newMessage.trim() === "/혼잡도") {
-        const systemMessage = {
-          sender: "System",
-          text: `현재 혼잡도는 ${congestion.percentage}% 입니다.`,
-          time: new Date().toLocaleTimeString([], {
-            hour: "2-digit",
-            minute: "2-digit",
-          }),
-          area: "시스템",
-        };
-        setMessages((prev) => [...prev, systemMessage]);
-        setNewMessage("");
-        return;
-      }
-
       const currentTime = new Date().toLocaleTimeString([], {
         hour: "2-digit",
         minute: "2-digit",
       });
+
       const messageData = {
         sender: name,
         text: newMessage,
@@ -180,7 +139,11 @@ function ChatPage() {
               <div
                 key={index}
                 className={`chat-message ${
-                  msg.sender === name ? "chat-you" : "chat-other"
+                  msg.sender === name
+                    ? "chat-you"
+                    : msg.area === "관제실 운영팀"
+                    ? "chat-control-room"
+                    : "chat-other"
                 }`}
               >
                 {msg.sender === name && (
