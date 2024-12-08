@@ -1,17 +1,15 @@
-import { useEffect, useRef, useState } from "react";
-import { io } from "socket.io-client";
+import { useEffect, useRef, useState, useContext } from "react";
+import { SocketContext } from "../SocketContext";
 
 import "../styles/admin-chat.css";
 
-export const socket = io("https://api.flrou.site", {
-  withCredentials: true,
-  transports: ["websocket"],
-});
-
 const ChatView = () => {
+  const ulRef = useRef(null);
+
+  const { socket } = useContext(SocketContext);
+
   const [chats, setChats] = useState([]); // 채팅 메시지 상태
   const [message, setMessage] = useState(""); // 입력 메시지 상태
-  const ulRef = useRef(null);
 
   useEffect(() => {
     // 채팅 리스트 하단 고정
@@ -21,30 +19,28 @@ const ChatView = () => {
   }, [chats]);
 
   useEffect(() => {
-    // 서버에서 메시지 수신
-    socket.on("chat message", (msg) => {
-      setChats((prevChats) => [...prevChats, msg]);
+    socket.on("chat", (message) => {
+      setChats((prev) => [...prev, message]);
     });
 
     return () => {
-      socket.off("chat message");
+      socket.off("chat");
     };
   }, []);
 
   const handleSend = () => {
     if (message.trim()) {
       const chatMessage = {
-        sender: "관제실 알림",
+        sender: "운영팀 관리자",
         text: message,
-        isAdmin: true,
-        timestamp: new Date().toLocaleTimeString([], {
+        time: new Date().toLocaleTimeString([], {
           hour: "2-digit",
           minute: "2-digit",
         }),
+        area: "관제실",
       };
-      socket.emit("chat message", chatMessage); // 서버로 메시지 전송
-      setChats((prevChats) => [...prevChats, chatMessage]); // UI 업데이트
-      setMessage(""); // 입력 필드 초기화
+      socket.emit("chat", chatMessage, 1);
+      setMessage("");
     }
   };
 
@@ -56,7 +52,7 @@ const ChatView = () => {
           <div className="chat-content">
             <ul ref={ulRef} className="chat-list">
               {chats.map((chat, index) =>
-                chat.isAdmin ? (
+                chat.area === "관제실" ? (
                   <li key={index} className="chat-block admin">
                     <div className="chat-box">
                       <div className="chat-box-text">

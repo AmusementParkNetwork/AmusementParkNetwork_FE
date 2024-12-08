@@ -5,7 +5,7 @@ import RankingView from "../components/ranking-view";
 
 import "../styles/admin.css";
 
-const Admin = () => {
+const AdminPage = () => {
   return (
     <div className="container">
       <ChatView />
@@ -16,4 +16,4 @@ const Admin = () => {
   );
 };
 
-export default Admin;
+export default AdminPage;

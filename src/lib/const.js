@@ -1,22 +1,165 @@
 export const rankingData = {
   amusement: [
-    { name: "T익스프레스", gauge: 6, waitTime: "180분" },
-    { name: "바이킹", gauge: 4, waitTime: "120분" },
-    { name: "사파리", gauge: 4, waitTime: "110분" },
-    { name: "판다월드", gauge: 3, waitTime: "100분" },
-    { name: "로스트밸리", gauge: 3, waitTime: "70분" },
-    { name: "허리케인", gauge: 2, waitTime: "60분" },
-    { name: "롤링익스트레인", gauge: 2, waitTime: "60분" },
-    { name: "더블락스핀", gauge: 2, waitTime: "40분" },
-    { name: "회전목마", gauge: 0, waitTime: "30분" },
+    {
+      name: "바이킹",
+      waiting: {
+        number: 36, // 대기 인원 수
+        waitTime: 36 * 5, // 대기 시간 (분)
+        guage: (36 * 5) / 30, // 30분에 1개씩
+      },
+      crowded: {
+        degree: 10, // 혼잡 인원
+        percentage: 10 * 10, // 혼잡도 (%)
+        guage: 10 / 2, // 2인에 1개씩
+      },
+    },
+    {
+      name: "사파리",
+      waiting: {
+        number: 22,
+        waitTime: 110,
+        guage: 110 / 30,
+      },
+      crowded: {
+        degree: 6,
+        percentage: 60,
+        guage: 6 / 2,
+      },
+    },
+    {
+      name: "판다월드",
+      waiting: {
+        number: 20,
+        waitTime: 100,
+        guage: 100 / 30,
+      },
+      crowded: {
+        degree: 3,
+        percentage: 30,
+        guage: 3 / 2,
+      },
+    },
+    {
+      name: "로스트밸리",
+      waiting: {
+        number: 14,
+        waitTime: 70,
+        guage: 70 / 30,
+      },
+      crowded: {
+        degree: 3,
+        percentage: 30,
+        guage: 3 / 2,
+      },
+    },
+    {
+      name: "허리케인",
+      waiting: {
+        number: 12,
+        waitTime: 60,
+        guage: 60 / 30,
+      },
+      crowded: {
+        degree: 2,
+        percentage: 20,
+        guage: 2 / 2,
+      },
+    },
+    {
+      name: "롤링익스트레인",
+      waiting: {
+        number: 12,
+        waitTime: 60,
+        guage: 60 / 30,
+      },
+      crowded: {
+        degree: 2,
+        percentage: 20,
+        guage: 2 / 2,
+      },
+    },
+    {
+      name: "더블락스핀",
+      waiting: {
+        number: 8,
+        waitTime: 40,
+        guage: 40 / 30,
+      },
+      crowded: {
+        degree: 2,
+        percentage: 20,
+        guage: 2 / 2,
+      },
+    },
+    {
+      name: "회전목마",
+      waiting: {
+        number: 6,
+        waitTime: 30,
+        guage: 30 / 30,
+      },
+      crowded: {
+        degree: 0,
+        percentage: 0,
+        guage: 0 / 2,
+      },
+    },
   ],
   amenity: [
-    { name: "푸드코트", gauge: 3, waitTime: "혼잡도 50" },
-    { name: "기념품샵", gauge: 2, waitTime: "혼잡도 30" },
+    {
+      name: "푸드코트",
+      waiting: {
+        number: 0,
+        waitTime: 0,
+        guage: 0,
+      },
+      crowded: {
+        degree: 5,
+        percentage: 50,
+        guage: 3 / 2,
+      },
+    },
+    {
+      name: "기념품샵",
+      waiting: {
+        number: 0,
+        waitTime: 0,
+        guage: 0,
+      },
+      crowded: {
+        degree: 3,
+        percentage: 30,
+        guage: 2 / 2,
+      },
+    },
   ],
   photo: [
-    { name: "장미원", gauge: 6, waitTime: "혼잡도 100" },
-    { name: "이솝우산길", gauge: 1, waitTime: "혼잡도 0" },
+    {
+      name: "장미원",
+      waiting: {
+        number: 0,
+        waitTime: 0,
+        guage: 0,
+      },
+      crowded: {
+        degree: 10,
+        percentage: 100,
+        guage: 6,
+      },
+    },
+    {
+      name: "이솝우산길",
+      waiting: {
+        number: 0,
+        waitTime: 0,
+        guage: 0,
+      },
+      crowded: {
+        degree: 0,
+        percentage: 0,
+        guage: 1,
+      },
+    },
   ],
 };
 

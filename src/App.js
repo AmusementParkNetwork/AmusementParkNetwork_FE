@@ -1,23 +1,50 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { SocketContext } from "./SocketContext";
+
 import "./App.css";
+
+const nav = [
+  {
+    area: "관제실 운영팀",
+    value: 1,
+    path: "/admin",
+  },
+  {
+    area: "놀이기구 관리구역",
+    value: 2,
+    path: "/chat",
+  },
+  {
+    area: "편의시설 관리구역",
+    value: 3,
+    path: "/chat",
+  },
+];
 
 function App() {
   const [name, setName] = useState(""); // 이름 저장
   const [workArea, setWorkArea] = useState(""); // 근무지 저장
   const navigate = useNavigate(); // Navigation hook
+  const { socket } = useContext(SocketContext);
 
   const handleStart = () => {
-    console.log("이름:", name);
-    console.log("근무지:", workArea || "근무지를 설정하지 않았습니다.");
+    if (!name || !workArea) return;
+
+    socket.emit("join", name, workArea);
 
     // 근무지에 따라 다른 페이지로 이동
-    if (workArea === "운영기구 구역") {
+    if (workArea === 1) {
       navigate("/admin", { state: { name, workArea } }); // admin.jsx로 이동
     } else {
       navigate("/chat", { state: { name, workArea } }); // chat.jsx로 이동
     }
   };
+
+  useEffect(() => {
+    console.log("이름:", name);
+    console.log("근무지:", workArea);
+  }, [name, workArea]);
 
   return (
     <div className="outer-container">
@@ -44,14 +71,16 @@ function App() {
           <select
             className="input-field"
             value={workArea}
-            onChange={(e) => setWorkArea(e.target.value)}
+            onChange={(e) => setWorkArea(Number(e.target.value))}
           >
             <option value="" disabled>
               근무지 설정
             </option>
-            <option>운영기구 구역</option>
-            <option>놀이기구 구역</option>
-            <option>편의시설 구역</option>
+            {nav.map((n, index) => (
+              <option key={index} value={n.value}>
+                {n.area}
+              </option>
+            ))}
           </select>
           <button className="start-button" onClick={handleStart}>
             시작
