@@ -1,17 +1,15 @@
 import { useEffect, useRef, useState } from "react";
 import { io } from "socket.io-client";
 
-import { chatData } from "../lib/const";
-
 import "../styles/admin-chat.css";
 
-export const socket = io('https://api.flrou.site', {
+export const socket = io("https://api.flrou.site", {
   withCredentials: true,
-  transports: ['websocket'],
+  transports: ["websocket"],
 });
 
 const ChatView = () => {
-  const [chats, setChats] = useState([]); // 기존 채팅 리스트 상태
+  const [chats, setChats] = useState([]); // 채팅 메시지 상태
   const [message, setMessage] = useState(""); // 입력 메시지 상태
   const ulRef = useRef(null);
 
@@ -35,7 +33,15 @@ const ChatView = () => {
 
   const handleSend = () => {
     if (message.trim()) {
-      const chatMessage = { sender: "관제실 알림", text: message, isAdmin: true };
+      const chatMessage = {
+        sender: "관제실 알림",
+        text: message,
+        isAdmin: true,
+        timestamp: new Date().toLocaleTimeString([], {
+          hour: "2-digit",
+          minute: "2-digit",
+        }),
+      };
       socket.emit("chat message", chatMessage); // 서버로 메시지 전송
       setChats((prevChats) => [...prevChats, chatMessage]); // UI 업데이트
       setMessage(""); // 입력 필드 초기화
@@ -54,21 +60,23 @@ const ChatView = () => {
                   <li key={index} className="chat-block admin">
                     <div className="chat-box">
                       <div className="chat-box-text">
-                        <span>{chat.sender}</span>
+                        <span className="chat-sender">{chat.sender}</span>
                         <p>{chat.text}</p>
                       </div>
                       <img src="/profile.png" alt="" className="chat-image" />
                     </div>
+                    <span className="chat-timestamp">{chat.timestamp}</span>
                   </li>
                 ) : (
                   <li key={index} className="chat-block">
                     <div className="chat-box">
                       <img src="/profile.png" alt="" className="chat-image" />
                       <div className="chat-box-text">
-                        <span>{chat.sender}</span>
+                        <span className="chat-sender">{chat.sender}</span>
                         <p>{chat.text}</p>
                       </div>
                     </div>
+                    <span className="chat-timestamp">{chat.timestamp}</span>
                   </li>
                 )
               )}
