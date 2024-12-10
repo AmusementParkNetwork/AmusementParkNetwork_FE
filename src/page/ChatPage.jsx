@@ -76,8 +76,6 @@ function ChatPage() {
   }, [name, workArea]);
 
   const handleSendMessage = () => {
-    console.log("뭔경우야 이게");
-    console.log(newMessage.trim());
     if (newMessage.trim() === "/대기시간") {
       const systemMessage = {
         sender: "System",
@@ -91,7 +89,7 @@ function ChatPage() {
       setMessages((prev) => [...prev, systemMessage]);
       setNewMessage("");
       return;
-    } else if (newMessage.trim() === "/대기시간") {
+    } else if (newMessage.trim() === "/혼잡도") {
       const systemMessage = {
         sender: "System",
         text: `현재 혼잡도는 ${congestion.percentage}% 입니다.`,
