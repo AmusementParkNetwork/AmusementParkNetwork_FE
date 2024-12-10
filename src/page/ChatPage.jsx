@@ -76,6 +76,7 @@ function ChatPage() {
   }, [name, workArea]);
 
   const handleSendMessage = () => {
+    console.log("뭔경우야 이게");
     console.log(newMessage.trim());
     if (newMessage.trim() === "/대기시간") {
       const systemMessage = {
