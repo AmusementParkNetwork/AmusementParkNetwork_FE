@@ -76,6 +76,33 @@ function ChatPage() {
   }, [name, workArea]);
 
   const handleSendMessage = () => {
+    if (newMessage.trim() === "/대기시간") {
+      const systemMessage = {
+        sender: "System",
+        text: `현재 대기시간은 ${waiting.time}분 입니다.`,
+        time: new Date().toLocaleTimeString([], {
+          hour: "2-digit",
+          minute: "2-digit",
+        }),
+        area: "시스템",
+      };
+      setMessages((prev) => [...prev, systemMessage]);
+      setNewMessage("");
+      return;
+    } else if (newMessage.trim() === "/대기시간") {
+      const systemMessage = {
+        sender: "System",
+        text: `현재 혼잡도는 ${congestion.percentage}% 입니다.`,
+        time: new Date().toLocaleTimeString([], {
+          hour: "2-digit",
+          minute: "2-digit",
+        }),
+        area: "시스템",
+      };
+      setMessages((prev) => [...prev, systemMessage]);
+      setNewMessage("");
+      return;
+    }
     if (newMessage.trim()) {
       const currentTime = new Date().toLocaleTimeString([], {
         hour: "2-digit",
